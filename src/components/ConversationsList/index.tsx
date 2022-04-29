@@ -19,31 +19,30 @@ const ConversationsList: FC = () => {
 		fetch('http://localhost:3005/conversations/' + userId)
 		.then((res) => res.json())
 		.then((data) => {
-			console.log("RESPONSE")
-			console.log(data)
-			setTimeout(() => {
-				setConversations(data)
-				setLoading(false)
-			}, 500)
+            setConversations(data)
+            setLoading(false)
 		})
     }, [])
     
     return (
         <div className={styles['conversationList']}>
-            {isLoading ? (
-                <div>
-                    loading
-                </div>
-            ) : (
-                <div>
-                    {conversations?.map((conv, cIndex) => {
-
-                        return (
-                            <ConversationCard {...conv} />
-                        )
-                    })}
-                </div>
-            )}
+            <div className={styles['conversationList__heading']}>
+                Discussions
+            </div>
+            <div className={styles['conversationList__body']}>
+                {isLoading ? (
+                    <div className="loader">loading</div>
+                ) : (
+                    <div>
+                        {conversations?.map((conv, cIndex) => {
+                            return (
+                                <ConversationCard {...conv} />
+                            )
+                        })}
+                    </div>
+                )}
+            </div>
+            
         </div>
     )
 }

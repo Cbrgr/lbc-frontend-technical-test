@@ -1,9 +1,6 @@
 import type { FC } from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
-import Logo from '../assets/lbc-logo.webp'
-import styles from '../../styles/Conversation.module.css'
+import styles from '../../styles/ConversationList.module.css'
 import { Conversation } from '../../types/conversation'
 import { getLoggedUserId } from '../../utils/getLoggedUserId'
 
@@ -20,20 +17,22 @@ const ConversationCard: FC<Conversation> = ({
     const userNickname = (selfId == recipientId) ? senderNickname : recipientNickname
     return (
         <div className={styles['conversationCard']}>
-            <div className={styles['conversationCard__visual']}>{userNickname.substring(0, 1)}</div>
-            <div className={styles['conversationCard__content']}>
-                <p className={styles['conversationCard__name']}>{userNickname}</p>
-                <div className={styles['conversationCard__infos']}>
-                    <Link
-                        href={{
-                            pathname: '/conversation',
-                            query: { id: id },
-                        }} as={`/conversation/${id}`}
-                    >
-                        link
-                    </Link>
+            <Link
+                href={{
+                    pathname: '/conversation',
+                    query: { id: id },
+                }} as={`/conversation/${id}`}
+            >
+                <div className={styles['conversationCard__wrapper']}>
+                    <div className={styles['conversationCard__visual']}>{userNickname.substring(0, 1)}</div>
+                    <div className={styles['conversationCard__content']}>
+                        <p className={styles['conversationCard__name']}>{userNickname}</p>
+                        <div className={styles['conversationCard__infos']}>
+                            
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </Link>
         </div>
     )
 }
